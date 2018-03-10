@@ -1,0 +1,24 @@
+{
+  "name": "road-to-react",
+  "version": "1.0.0",
+  "description": "Working through the road to react project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Laszlo-Lazuer/road-to-react.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Laszlo-Lazuer/road-to-react/issues"
+  },
+  "homepage": "https://github.com/Laszlo-Lazuer/road-to-react#readme",
+  "devDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
