@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import Button from '../Button';
+import Loading from '../Loading';
 import Search from '../Search';
 import Table from '../Table';
 import {
@@ -17,6 +18,7 @@ require('./index.css');
 
 
 class App extends Component {
+
   constructor(props) {
     super(props);
 
@@ -24,7 +26,8 @@ class App extends Component {
       results: null,
       searchKey: '',
       searchTerm: DEFAULT_QUERY,
-      error: null
+      error: null,
+      isLoading: false,
     };
   }
 
@@ -51,15 +54,19 @@ class App extends Component {
       results: {
         ...results,
         [searchKey]: { hits: updatedHits, page }
-      }
+      },
+      isLoading: false
     });
     }
 
-  fetchSearchTopstories = (searchTerm, page = 0) =>
+  fetchSearchTopstories = (searchTerm, page = 0) => {
+    this.setState({ isLoading: true });
+
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopstories(result))
       .catch(e => this.setState({ error: e }));
+    }
 
   needsToSearchTopstories = (searchTerm) =>
       !this.state.results[searchTerm];
@@ -98,7 +105,8 @@ class App extends Component {
       searchTerm,
       results,
       searchKey,
-      error
+      error,
+      isLoading
     } = this.state;
 
     const page = (
@@ -134,9 +142,13 @@ class App extends Component {
           />
         }
         <div className="interactions">
+          { isLoading
+            ? <Loading />
+            :
           <Button onClick={() => this.fetchSearchTopstories(searchKey, page + 1)}>
             More
           </Button>
+          }
         </div>
       </div>
     );
