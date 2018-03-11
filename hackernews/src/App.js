@@ -22,22 +22,23 @@ const list = [
 
 const animal = 'squirrel';
 
+const isSearched = (searchTerm) => (item) =>
+!searchTerm || item.title.toLowerCase().includes(searchTerm.toLowerCase());
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       list,
-      animal
+      animal,
+      searchTerm: '',
     };
 
-    // this.onDismiss = this.onDismiss.bind(this);
   }
 
-  // onDismiss(id) {
-  //   const isNotID = item => item.objectID !== id;
-  //   const updatedList = this.state.list.filter(isNotID);
-  //   this.setState({ list: updatedList });
-  // }
+  onSearchCHange = (event) => {
+      this.setState({ searchTerm: event.target.value});
+  }
 
   onDismiss = (id) => {
     const isNotID = item => item.objectID !== id;
@@ -49,8 +50,13 @@ class App extends Component {
 render() {
   return (
     <div className="App">
-    <span>{this.state.animal}</span>
-      {this.state.list.map(item => {
+      <span>{this.state.animal}</span>
+      <form>
+        <input type='text' onChange={this.onSearchCHange}
+        />
+      </form>
+      {this.state.list.filter(isSearched(this.state.searchTerm)).map(item => {
+
         return (
         <div key={item.objectID}>
           <span><a href={item.url}>{item.title}</a></span>
