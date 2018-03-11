@@ -20,17 +20,44 @@ const list = [
 },
 ];
 
+const animal = 'squirrel';
+
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list,
+      animal
+    };
+
+    this.onDismiss = this.onDismiss.bind(this);
+  }
+
+  onDismiss(id) {
+    const isNotID = item => item.objectID !== id;
+    const updatedList = this.state.list.filter(isNotID);
+    this.setState({ list: updatedList });
+  }
+
 render() {
   return (
     <div className="App">
-      {list.map(item => {
+    <span>{this.state.animal}</span>
+      {this.state.list.map(item => {
         return (
         <div key={item.objectID}>
           <span><a href={item.url}>{item.title}</a></span>
           <span>{item.author}</span>
           <span>{item.num_comments}</span>
           <span>{item.points}</span>
+          <span>
+            <button
+              onClick={() => this.onDismiss(item.objectID)}
+              type='button'
+            >
+            Dismiss
+            </button>
+          </span>
         </div>
       );
       })}
