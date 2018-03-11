@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import fetch from 'isomorphic-fetch';
 import Button from '../Button';
 import Search from '../Search';
 import Table from '../Table';
@@ -143,3 +144,9 @@ class App extends Component {
 }
 
 export default App;
+
+export {
+  Button,
+  Search,
+  Table,
+}
