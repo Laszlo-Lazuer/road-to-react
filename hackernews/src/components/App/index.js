@@ -15,7 +15,6 @@ const PARAM_PAGE = 'page=';
 const PARAM_HPP = 'hitsPerPage=';
 
 class App extends Component {
-
   constructor(props) {
     super(props);
 
@@ -25,13 +24,6 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       error: null
     };
-
-    this.needsToSearchTopstories = this.needsToSearchTopstories.bind(this);
-    this.setSearchTopstories = this.setSearchTopstories.bind(this);
-    this.fetchSearchTopstories = this.fetchSearchTopstories.bind(this);
-    this.onSearchChange = this.onSearchChange.bind(this);
-    this.onSearchSubmit = this.onSearchSubmit.bind(this);
-    this.onDismiss = this.onDismiss.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +32,7 @@ class App extends Component {
     this.fetchSearchTopstories(searchTerm);
   }
 
-  setSearchTopstories(result) {
+  setSearchTopstories = (result) => {
     const { hits, page } = result;
     const { searchKey, results } = this.state;
 
@@ -59,24 +51,21 @@ class App extends Component {
         [searchKey]: { hits: updatedHits, page }
       }
     });
-  }
+    }
 
-  fetchSearchTopstories(searchTerm, page = 0) {
+  fetchSearchTopstories = (searchTerm, page = 0) =>
     fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
       .then(response => response.json())
       .then(result => this.setSearchTopstories(result))
-    	.catch(e => this.setState({ error: e }));
-  }
+      .catch(e => this.setState({ error: e }));
 
-  needsToSearchTopstories(searchTerm) {
-    return !this.state.results[searchTerm];
-  }
+  needsToSearchTopstories = (searchTerm) =>
+      !this.state.results[searchTerm];
 
-  onSearchChange(event) {
+  onSearchChange = (event) =>
     this.setState({ searchTerm: event.target.value });
-  }
 
-  onSearchSubmit(event) {
+  onSearchSubmit = (event) => {
     const { searchTerm } = this.state;
     this.setState({ searchKey: searchTerm });
 
@@ -87,7 +76,7 @@ class App extends Component {
     event.preventDefault();
   }
 
-  onDismiss(id) {
+  onDismiss = (id) => {
     const { searchKey, results } = this.state;
     const { hits, page } = results[searchKey];
 
