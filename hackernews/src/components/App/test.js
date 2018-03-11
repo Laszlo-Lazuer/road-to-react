@@ -42,6 +42,12 @@ describe('Search', () => {
 });
 
 describe('Button', () => {
+  const props = {
+    list: [
+      { title: '1', author: '1', num_comments: 1, points: 2, objectID: 'y' },
+      { title: '2', author: '2', num_comments: 1, points: 2, objectID: 'z' },
+    ],
+  };
 
   it('renders', () => {
     const div = document.createElement('div');
@@ -54,6 +60,13 @@ describe('Button', () => {
     );
     let tree = component.toJSON();
     expect(tree).toMatchSnapshot();
+  });
+
+  it ('shows button', () => {
+    const element = shallow(
+          <Table {  ...props } />
+    );
+    expect(element.find('.button-inline').length).toBe(2);
   });
 
 });
