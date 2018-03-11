@@ -28,13 +28,33 @@ exports[`App snapshots 1`] = `
   <div
     className="interactions"
   >
-    <button
-      className=""
-      onClick={[Function]}
-      type="button"
-    >
-      More
-    </button>
+    <div>
+      <div
+        className="MuiCircularProgress-root-1 MuiCircularProgress-colorSecondary-3"
+        role="progressbar"
+        style={
+          Object {
+            "height": 80,
+            "width": 80,
+          }
+        }
+      >
+        <svg
+          className="MuiCircularProgress-svg-4 MuiCircularProgress-svgIndeterminate-5"
+          viewBox="0 0 50 50"
+        >
+          <circle
+            className="MuiCircularProgress-circle-6 MuiCircularProgress-circleIndeterminate-7"
+            cx={25}
+            cy={25}
+            fill="none"
+            r={20}
+            strokeWidth={5}
+            style={Object {}}
+          />
+        </svg>
+      </div>
+    </div>
   </div>
 </div>
 `;
