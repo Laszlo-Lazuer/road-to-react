@@ -30,14 +30,21 @@ class App extends Component {
       animal
     };
 
-    this.onDismiss = this.onDismiss.bind(this);
+    // this.onDismiss = this.onDismiss.bind(this);
   }
 
-  onDismiss(id) {
+  // onDismiss(id) {
+  //   const isNotID = item => item.objectID !== id;
+  //   const updatedList = this.state.list.filter(isNotID);
+  //   this.setState({ list: updatedList });
+  // }
+
+  onDismiss = (id) => {
     const isNotID = item => item.objectID !== id;
     const updatedList = this.state.list.filter(isNotID);
     this.setState({ list: updatedList });
   }
+
 
 render() {
   return (
