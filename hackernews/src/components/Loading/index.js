@@ -1,7 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import CircularProgress from 'material-ui/Progress/CircularProgress';
 
 const Loading = () =>
-  <div>Loading ...</div>
+  <div>
+    <CircularProgress color='secondary' size={80} thickness={5}/>
+  </div>
 
   export default Loading;
