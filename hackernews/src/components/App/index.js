@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import Button from '../Button';
 import Loading from '../Loading';
 import Search from '../Search';
@@ -27,8 +27,6 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       error: null,
       isLoading: false,
-      sortKey: 'NONE',
-      isSortReverse: false,
     };
   }
 
@@ -113,8 +111,6 @@ class App extends Component {
       searchKey,
       error,
       isLoading,
-      sortKey,
-      isSortReverse
     } = this.state;
 
     const page = (
@@ -146,8 +142,6 @@ class App extends Component {
           </div>
           : <Table
             list={list}
-            sortKey={sortKey}
-            onSort={this.onSort}
             onDismiss={this.onDismiss}
           />
         }
