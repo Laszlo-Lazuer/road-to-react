@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
+import classNames from 'classnames';
 import Button from '../Button';
 import Loading from '../Loading';
 import Search from '../Search';
