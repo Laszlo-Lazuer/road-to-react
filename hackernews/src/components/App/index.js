@@ -15,8 +15,6 @@ import {
 } from '../../constants';
 require('./index.css');
 
-
-
 class App extends Component {
 
   constructor(props) {
@@ -28,7 +26,14 @@ class App extends Component {
       searchTerm: DEFAULT_QUERY,
       error: null,
       isLoading: false,
+      sortKey: 'NONE',
+      isSortReverse: false,
     };
+  }
+
+  onSort = (sortKey) => {
+    const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+    this.setState({ sortKey });
   }
 
   componentDidMount() {
@@ -106,7 +111,9 @@ class App extends Component {
       results,
       searchKey,
       error,
-      isLoading
+      isLoading,
+      sortKey,
+      isSortReverse
     } = this.state;
 
     const page = (
@@ -138,6 +145,8 @@ class App extends Component {
           </div>
           : <Table
             list={list}
+            sortKey={sortKey}
+            onSort={this.onSort}
             onDismiss={this.onDismiss}
           />
         }
