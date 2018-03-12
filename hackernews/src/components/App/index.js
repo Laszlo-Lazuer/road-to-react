@@ -5,6 +5,7 @@ import Button from '../Button';
 import Loading from '../Loading';
 import Search from '../Search';
 import Table from '../Table';
+import updateSearchTopstoriesState from '../../State';
 import {
   DEFAULT_QUERY,
   DEFAULT_HPP,
@@ -31,7 +32,7 @@ class App extends Component {
   }
 
   onSort = (sortKey) => {
-    const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+    // const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
     this.setState({ sortKey });
   }
 
@@ -43,25 +44,8 @@ class App extends Component {
 
   setSearchTopstories = (result) => {
     const { hits, page } = result;
-    const { searchKey, results } = this.state;
-
-    const oldHits = results && results[searchKey]
-      ? results[searchKey].hits
-      : [];
-
-    const updatedHits = [
-      ...oldHits,
-      ...hits
-    ];
-
-    this.setState({
-      results: {
-        ...results,
-        [searchKey]: { hits: updatedHits, page }
-      },
-      isLoading: false
-    });
-    }
+    this.setState(updateSearchTopstoriesState(hits, page));
+  }
 
   fetchSearchTopstories = (searchTerm, page = 0) => {
     this.setState({ isLoading: true });
